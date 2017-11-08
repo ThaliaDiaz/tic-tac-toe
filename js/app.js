@@ -17,6 +17,15 @@ function addJugada(event) {
   }
 }
 
+var matriz = document.getElementsByTagName('tr');
+for (i = 0; i <= matriz; i++) {
+  for (j = 0; j < matriz[0]; j++) {
+    
+  }
+}
+
+
+/*
 if (document.getElementById('uno').firstChild === document.getElementById('dos').firstChild && document.getElementById('dos').firstChild === document.getElementById('tres').firstChild && document.getElementById('tres') !== '' && document.getElementById('uno') !== '' && document.getElementById('tres') !== '') {
   document.write('El ganador es:' + getElementById('dos'));
 } else if (document.getElementById('cuatro').firstChild === document.getElementById('cinco').firstChild && document.getElementById('cinco').firstChild === document.getElementById('seis').firstChild) {
@@ -35,4 +44,4 @@ if (document.getElementById('uno').firstChild === document.getElementById('dos')
   document.write('El ganador es:' + document.getElementById('cinco'));
 } else {
   document.write('no hay ganador');
-}
+}*/
