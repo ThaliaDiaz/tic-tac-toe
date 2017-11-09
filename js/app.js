@@ -4,6 +4,7 @@ window.onload = function() {
   var board = document.querySelector('.board-js');
   
   board.addEventListener('click', addJugada);
+  document.getElementById('reset').addEventListener('click', reset);
 };
   
 var centinel = true;
@@ -20,21 +21,17 @@ function addJugada(event) {
 }
 
 function reset() {
-  for (var i = 0; i < square.length; i++) {
-    square[i].textContent = '';
-    isXTurn = true;
-    square[i].classList.remove('crossOut');
-    square[i].classList.remove('gameOver');
-  }
-  gameOver = false;
-  if (isXTurn) playerTurnDisplay.classList.add('xTurn');
-  boxesLeftToClick = 9;
+  window.location.reload();
 }
 
-var matriz = document.getElementsByTagName('td');
-for (i = 0; i <= matriz; i++) {
-  for (j = 0; j < matriz[0]; j++) {
-    
+var matriz = document.getElementsByTagName('tr');
+
+function recorrer(event) {
+  var array = [];
+  for (i = 0; i <= matriz.length; i++) {
+    for (j = 0; j < matriz[i].length; j++) {
+      array.push(matriz[j].textContent);
+    }
   }
 }
 
