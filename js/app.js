@@ -1,4 +1,16 @@
-var square = document.querySelectorAll('td');
+var count = 0;
+var win = false;
+var centinel = true;
+
+var uno = document.getElementById('uno');
+var dos = document.getElementById('dos');
+var tres = document.getElementById('tres');
+var cuatro = document.getElementById('cuatro');
+var cinco = document.getElementById('cinco');
+var seis = document.getElementById('seis');
+var siete = document.getElementById('siete');
+var ocho = document.getElementById('ocho');
+var nueve = document.getElementById('nueve');
 
 window.onload = function() {
   var board = document.querySelector('.board-js');
@@ -7,16 +19,22 @@ window.onload = function() {
   document.getElementById('reset').addEventListener('click', reset);
 };
   
-var centinel = true;
   
 function addJugada(event) {
   if (event.target.matches('td') && event.target.textContent === '') {
-    if (centinel) 
+    if (centinel) {
       event.target.textContent = 'X';
-    else 
+      count++;
+    } else {
       event.target.textContent = 'O';
+      count++;
+    }
   
     centinel = !centinel;
+  }
+  // llamando  a la funcion  winner, en el mejor de los casos se gana con cinco jugadas y en el peor de los casos con 9
+  if (count >= 5 && count <= 9) {
+    winner();
   }
 }
 
@@ -24,34 +42,31 @@ function reset() {
   window.location.reload();
 }
 
-var matriz = document.getElementsByTagName('tr');
+function winner() {
+  if ((uno.textContent === 'X' && dos.textContent === 'X' && tres.textContent === 'X') ||
+  (cuatro.textContent === 'X' && cinco.textContent === 'X' && seis.textContent === 'X') ||
+  (siete.textContent === 'X' && ocho.textContent === 'X' && nueve.textContent === 'X') ||
+  (uno.textContent === 'X' && cuatro.textContent === 'X' && siete.textContent === 'X') ||
+    (dos.textContent === 'X' && cinco.textContent === 'X' && ocho.textContent === 'X') ||
+    (tres.textContent === 'X' && seis.textContent === 'X' && nueve.textContent === 'X') ||
+    (uno.textContent === 'X' && cinco.textContent === 'X' && nueve.textContent === 'X') ||
+    (tres.textContent === 'X' && cinco.textContent === 'X' && siete.textContent === 'X')) {
+    document.getElementById('result').innerHTML = 'Ganador: X ';
+    count = 10;
+    win = true;
+    // Declaramos todas las posibles situaciones en la que ganaria O
+  } else if ((uno.textContent === 'O' && dos.textContent === 'O' && tres.textContent === 'O') ||
+  (cuatro.textContent === 'O' && cinco.textContent === 'O' && seis.textContent === 'O') ||
+  (siete.textContent === 'O' && ocho.textContent === 'O' && nueve.textContent === 'O') ||
+  (uno.textContent === 'O' && cuatro.textContent === 'O' && siete.textContent === 'O') ||
+    (dos.textContent === 'O' && cinco.textContent === 'O' && ocho.textContent === 'O') ||
+    (tres.textContent === 'O' && seis.textContent === 'O' && nueve.textContent === 'O') ||
+    (uno.textContent === 'O' && cinco.textContent === 'O' && nueve.textContent === 'O') ||
+    (tres.textContent === 'O' && cinco.textContent === 'O' && siete.textContent === 'O')) {
+    document.getElementById('result').innerHTML = 'Ganador: O ';
+    count = 10;
+    win = true;
+  } else {
 
-function recorrer(event) {
-  var array = [];
-  for (i = 0; i <= matriz.length; i++) {
-    for (j = 0; j < matriz[i].length; j++) {
-      array.push(matriz[j].textContent);
-    }
   }
-}
-
-
-if (document.getElementById('uno').firstChild === document.getElementById('dos').firstChild && document.getElementById('dos').firstChild === document.getElementById('tres').firstChild && document.getElementById('tres') !== '' && document.getElementById('uno') !== '' && document.getElementById('dos') !== '') {
-  document.write('El ganador es:' + document.getElementById('dos'));
-} else if (document.getElementById('cuatro').firstChild === document.getElementById('cinco').firstChild && document.getElementById('cinco').firstChild === document.getElementById('seis').firstChild && document.getElementById('cuatro') !== '' && document.getElementById('cinco') !== '' && document.getElementById('seis') !== '') {
-  document.write('El ganador es:' + document.getElementById('cuatro'));
-} else if (document.getElementById('siete').firstChild === document.getElementById('ocho').firstChild && document.getElementById('ocho').firstChild === document.getElementById('nueve').firstChild && document.getElementById('siete') !== '' && document.getElementById('ocho') !== '' && document.getElementById('nueve') !== '') {
-  document.write('El ganador es:' + document.getElementById('siete'));
-} else if (document.getElementById('uno').firstChild === document.getElementById('cuatro').firstChild && document.getElementById('cuatro').firstChild === document.getElementById('siete').firstChild && document.getElementById('uno') !== '' && document.getElementById('cuatro') !== '' && document.getElementById('siete') !== '') {
-  document.write('El ganador es:' + document.getElementById('cuatro'));
-} else if (document.getElementById('dos').firstChild === document.getElementById('cinco').firstChild && document.getElementById('cinco').firstChild === document.getElementById('ocho').firstChild && document.getElementById('dos') !== '' && document.getElementById('cinco') !== '' && document.getElementById('ocho') !== '') {
-  document.write('El ganador es:' + document.getElementById('dos'));
-} else if (document.getElementById('tres').firstChild === document.getElementById('seis').firstChild && document.getElementById('seis').firstChild === document.getElementById('nueve').firstChild && document.getElementById('tres') !== '' && document.getElementById('seis') !== '' && document.getElementById('nueve') !== '') {
-  document.write('El ganador es:' + document.getElementById('seis'));
-} else if (document.getElementById('uno').firstChild === document.getElementById('cinco').firstChild && document.getElementById('cinco').firstChild === document.getElementById('nueve').firstChild && document.getElementById('uno') !== '' && document.getElementById('cinco') !== '' && document.getElementById('nueve') !== '') {
-  document.write('El ganador es:' + document.getElementById('cinco'));
-} else if (document.getElementById('tres').firstChild === document.getElementById('cinco').firstChild && document.getElementById('cinco').firstChild === document.getElementById('siete').firstChild && document.getElementById('tres') !== '' && document.getElementById('cinco') !== '' && document.getElementById('siete') !== '') {
-  document.write('El ganador es:' + document.getElementById('cinco'));
-} else {
-  document.write('no hay ganador');
 }
